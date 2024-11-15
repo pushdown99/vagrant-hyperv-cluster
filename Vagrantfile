@@ -11,6 +11,13 @@ master = "k8s-m"
 worker = "k8s-w"
 
 Vagrant.configure("2") do |config|
+  hosts = []
+  hosts.push ("#{ip}0    #{master}")
+  (1..num).each do |n|
+    hosts.push ("#{ip}#{n}    #{worker}#{n}")
+  end
+  print hosts
+
   config.vm.define master do |c|
     c.vm.box=box
     c.vm.provider :hyperv do |v|
@@ -23,7 +30,7 @@ Vagrant.configure("2") do |config|
     c.vm.hostname=master
     c.vm.synced_folder ".", "/vagrant", disabled: true
     c.vm.network "forwarded_port", guest: 22, host: "#{port}0", auto_correct: true, id: "ssh"
-    c.vm.provision 'shell', path: "bootstrap.sh", args: ["#{ip}0", "#{broad}"] 
+    c.vm.provision 'shell', path: "bootstrap.sh", args: ["#{ip}0", "#{broad}"]     
   end
 
   (1..num).each do |n|
@@ -42,4 +49,6 @@ Vagrant.configure("2") do |config|
       c.vm.provision 'shell', path: "bootstrap.sh", args: ["#{ip}#{n}", "#{broad}"]
     end
   end
+  
+  print ips
 end
