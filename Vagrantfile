@@ -49,6 +49,4 @@ Vagrant.configure("2") do |config|
       c.vm.provision 'shell', path: "bootstrap.sh", args: ["#{ip}#{n}", "#{broad}"]
     end
   end
-  
-  print ips
 end
