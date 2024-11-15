@@ -11,12 +11,12 @@ master = "k8s-m"
 worker = "k8s-w"
 
 Vagrant.configure("2") do |config|
-  hosts = []
-  hosts.push ("#{ip}0    #{master}")
+  hosts = ""
+  hosts += ["#{ip}0", "#{master}"].join('\t') + '\n'
   (1..num).each do |n|
-    hosts.push ("#{ip}#{n}    #{worker}#{n}")
+    hosts += ["#{ip}#{n}", "#{worker}#{n}"].join + '\n'
   end
-  print hosts
+  puts hosts
 
   config.vm.define master do |c|
     c.vm.box=box
