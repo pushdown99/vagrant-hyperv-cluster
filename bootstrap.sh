@@ -33,7 +33,10 @@ apt-get update
 apt-get install -y kubelet kubeadm kubectl
 apt-mark hold kubelet kubeadm kubectl
 
-wget https://github.com/naver/d2codingfont/releases/download/VER1.3.2/D2Coding-Ver1.3.2-20180524.zip
-unzip -d /usr/share/fonts/d2coding D2Coding-Ver1.3.2-20180524.zip
-rm D2Coding-Ver1.3.2-20180524.zip
-sudo fc-cache -f -v
+#wget https://github.com/naver/d2codingfont/releases/download/VER1.3.2/D2Coding-Ver1.3.2-20180524.zip
+#unzip -d /usr/share/fonts/d2coding D2Coding-Ver1.3.2-20180524.zip
+#rm D2Coding-Ver1.3.2-20180524.zip
+#sudo fc-cache -f -v
+
+ifconfig eth0:1 $1 netmask 255.255.255.0 broadcast $2
+ifconfig eth0:1 $1 up

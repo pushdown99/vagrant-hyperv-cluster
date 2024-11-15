@@ -4,6 +4,8 @@
 box = "boxen/ubuntu-22.04"
 ver = "20241115.rev1.0"
 num = 2
+ip = '192.168.0.10'
+broad = '192.168.0.255'
 port = 1003
 master = "k8s-m"
 worker = "k8s-w"
@@ -21,7 +23,7 @@ Vagrant.configure("2") do |config|
     c.vm.hostname=master
     c.vm.synced_folder ".", "/vagrant", disabled: true
     c.vm.network "forwarded_port", guest: 22, host: "#{port}0", auto_correct: true, id: "ssh"
-    c.vm.provision "shell", path: "bootstrap.sh" 
+    c.vm.provision 'shell', path: "bootstrap.sh", args: ["#{ip}0", "#{broad}"] 
   end
 
   (1..num).each do |n|
@@ -37,7 +39,7 @@ Vagrant.configure("2") do |config|
       c.vm.hostname="#{worker}#{n}"
       c.vm.synced_folder ".", "/vagrant", disabled: true
       c.vm.network "forwarded_port", guest: 22, host: "#{port}#{n}", auto_correct: true, id: "ssh"
-      c.vm.provision "shell", path: "bootstrap.sh" 
+      c.vm.provision 'shell', path: "bootstrap.sh", args: ["#{ip}#{n}", "#{broad}"]
     end
   end
 end
