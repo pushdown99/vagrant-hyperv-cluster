@@ -40,3 +40,5 @@ apt-mark hold kubelet kubeadm kubectl
 
 ifconfig eth0:1 $1 netmask 255.255.255.0 broadcast $2
 ifconfig eth0:1 $1 up
+
+echo $3 >> /etc/hosts
