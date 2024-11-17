@@ -47,3 +47,4 @@ do
   l=(`echo $x | tr "," "\n"`)
   echo "${l[0]}" "${l[1]}" >> /etc/hosts
 done
+
