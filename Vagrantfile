@@ -12,9 +12,9 @@ worker = "k8s-w"
 
 Vagrant.configure("2") do |config|
   hosts = ""
-  hosts += ["#{ip}0", "#{master}"].join('\t') + '\n'
+  hosts += ["#{ip}0", "#{master}"].join(',')
   (1..num).each do |n|
-    hosts += ["#{ip}#{n}", "#{worker}#{n}"].join + '\n'
+    hosts += '|' + ["#{ip}#{n}", "#{worker}#{n}"].join(',')
   end
   puts hosts
 

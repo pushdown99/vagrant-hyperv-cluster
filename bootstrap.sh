@@ -41,4 +41,9 @@ apt-mark hold kubelet kubeadm kubectl
 ifconfig eth0:1 $1 netmask 255.255.255.0 broadcast $2
 ifconfig eth0:1 $1 up
 
-echo $3 >> /etc/hosts
+hosts=(`echo $3 | tr "|" "\n"`)
+for x in "${hosts[@]}"
+do
+  l=(`echo $x | tr "," "\n"`)
+  echo "${l[0]}" "${l[1]}" >> /etc/hosts
+done
