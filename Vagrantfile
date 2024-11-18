@@ -52,7 +52,8 @@ Vagrant.configure("2") do |config|
       c.vm.hostname="#{worker}#{n}"
       c.vm.synced_folder ".", "/vagrant", disabled: true
       c.vm.network "forwarded_port", guest: 22, host: "#{port}#{n}", auto_correct: true, id: "ssh"
-      c.vm.provision 'shell', path: "bootstrap.sh", args: ["#{ip}#{n}", "#{broad}", "#{hosts}", "#{cni}"]
+      c.vm.provision 'shell', path: "bootstrap.sh", args: ["#{ip}#{n}", "#{broad}", "#{hosts}"]
+      c.vm.provision 'shell', path: "k8s-worker.sh", args: ["#{ip}0", "#{token}"]
     end
   end
 end
